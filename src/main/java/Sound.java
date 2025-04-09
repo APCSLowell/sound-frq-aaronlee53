@@ -48,4 +48,5 @@ public class Sound
       newSamples[i] = samples[startIndex + i];
     }
     samples = newSamples;
+  }
 }
