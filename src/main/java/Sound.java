@@ -16,18 +16,18 @@ public class Sound
   public int limitAmplitude(int limit)
   {  
     /* to be implemented in part (a) */
-    int count = 0;
-    for(int i = 0; i < samples.length; i++){
-      if(samples[i]>limit){
+    int numChanges = 0;
+    for (int i =0; i<samples.length; i++){
+      if (samples[i] > limit){
         samples[i] = limit;
-        count++;
+        numChanges++;
       }
-      else if(samples[i]<(-limit)){
+      else if (samples[i] < -limit){
         samples[i] = -limit;
-        count++;
+        numChanges++;
       }
     }
-    return count;
+    return numChanges;
   }
 
 
@@ -37,21 +37,15 @@ public class Sound
    *  Precondition: samples contains at least one nonzero value
    *  Postcondition: the length of samples reflects the removal of starting silence
    */
-  public void trimSilenceFromBeginning()
-  {
+  public void trimSilenceFromBeginning() {
     /* to be implemented in part (b) */
-    int count = 0;
-    for(int i = 0; i < samples.length; i++){
-      if(samples[i] == 0){
-        count++;
-      }
-      else{
-        break;
-      }
+    int startIndex = 0;
+    while(startIndex < samples.length && samples[startIndex] == 0){
+      startIndex++;
     }
-    int [] newSamples = new int[count];
-      for(int j = count; j > 0; j--){
-        samples.remove(j);
-      }
-  }
+    int[] newSamples = new int[samples.length - startIndex];
+    for(int i =0; i < newSamples.length; i++){
+      newSamples[i] = samples[startIndex + i];
+    }
+    samples = newSamples;
 }
